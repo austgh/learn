@@ -12,6 +12,7 @@ import java.util.*;
  * @author think
  * @version 1.0
  * @date 2022/3/6 7:15
+ * 计算账户日均余额
  */
 public class OptimizeBalance {
     private static final Logger logger = LoggerFactory.getLogger(OptimizeBalance.class);
@@ -21,22 +22,23 @@ public class OptimizeBalance {
         String endDate = "2022-02-28";
 
         List<Account> resultList = initAccountList();
-        process(beginDate,endDate,resultList);
+        process(beginDate, endDate, resultList);
     }
 
-    public static void process(String beginDate,String endDate,List<Account> resultList) {
+    public static void process(String beginDate, String endDate, List<Account> resultList) {
         Set<String> accountSet = countAccounts(resultList);
 
         Map<String, List<Account>> result = getAccountNoListMap(resultList, accountSet);
-        logger.info("result:{}",result);
+        logger.info("result:{}", result);
 
         int rows = accountSet.size();
         int columns = betweenDays(beginDate, endDate) + 1;
-        logger.info("columns:{},rows:{}",columns,rows);
+        logger.info("columns:{},rows:{}", columns, rows);
         double[][] data = new double[rows][columns];
         calculateAccountsBalance(beginDate, endDate, columns, data, result);
         calculateEverydayBalance(rows, columns, data);
     }
+
     /**
      * 计算账户数
      */
@@ -54,21 +56,21 @@ public class OptimizeBalance {
      */
     private static void calculateEverydayBalance(int rows, int columns, double[][] data) {
         for (int i = 0; i < rows; i++) {
-            StringBuilder builder=new StringBuilder();
+            StringBuilder builder = new StringBuilder();
             for (int j = 0; j < columns; j++) {
                 builder.append("data[").append(i).append("][").append(j).append("]=").append(data[i][j]).append("\t");
             }
             logger.info(builder.toString());
         }
-        double total=0;
+        double total = 0;
         int count = 0;
         double[] finalRes = new double[columns];
-        StringBuilder builder=new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < columns; i++) {
             for (int j = 0; j < rows; j++) {
                 finalRes[i] += data[j][i];
             }
-            if(finalRes[i]>0){
+            if (finalRes[i] > 0) {
                 total += finalRes[i];
                 count++;
             }
@@ -76,7 +78,7 @@ public class OptimizeBalance {
         }
         logger.info(builder.toString());
         double avg = 0;
-        if(count>0){
+        if (count > 0) {
             avg = total / count;
         }
         logger.info("账号总金额:{},天数:{},日均余额:{}", total, count, avg);
@@ -85,9 +87,10 @@ public class OptimizeBalance {
     /**
      * 计算每个账户的日均余额
      */
-    private static void calculateAccountsBalance(String beginDate, String endDate, int columns, double[][] data, Map<String,
+    private static void calculateAccountsBalance(String beginDate, String endDate, int columns, double[][] data,
+                                                 Map<String,
             List<Account>> result) {
-        int row=0;
+        int row = 0;
         String maxLessThanBeginDate = "";
         String handleDate = beginDate;
         for (Map.Entry<String, List<Account>> entry : result.entrySet()) {
@@ -137,7 +140,7 @@ public class OptimizeBalance {
                 } else {
                     //当前日期小于开始日期
                     maxLessThanBeginDate = tempList.get(j).getBalanceDate();
-                    logger.info("缓存最大的小于开始日期的值:{}",maxLessThanBeginDate);
+                    logger.info("缓存最大的小于开始日期的值:{}", maxLessThanBeginDate);
                 }
             }
             //后半段是否处理
@@ -173,7 +176,7 @@ public class OptimizeBalance {
     }
 
     /**
-     *初始化数据
+     * 初始化数据
      */
     public static List<Account> initAccountList() {
         List<Account> list = new ArrayList<>();

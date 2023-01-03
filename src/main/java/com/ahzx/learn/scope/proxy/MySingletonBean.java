@@ -14,8 +14,8 @@ public class MySingletonBean {
     @Autowired
     private MyPrototypeBean myPrototypeBean;
 
-    public void showMessage(){
-        logger.info("myPrototypeBean1 hashcode:{}",myPrototypeBean.hashCode());
-        logger.info("Hi, the time is {}",myPrototypeBean.getDateTime());
+    public void showMessage() {
+        logger.info("myPrototypeBean1 hashcode:{}", myPrototypeBean.hashCode());
+        logger.info("Hi, the time is {}", myPrototypeBean.getDateTime());
     }
 }

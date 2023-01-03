@@ -31,8 +31,10 @@ public class SingletonBean {
 //    }
 //    @Autowired
 //    private ApplicationContext context;
+
     /**
      * 每次都从ApplicatonContext中获取新的bean引用
+     *
      * @return PrototypeBean instance
      */
 //    PrototypeBean getFromApplicationContext() {
@@ -50,9 +52,10 @@ public class SingletonBean {
     protected PrototypeBean methodInject() {
         return null;
     }
+
     public void print() {
         PrototypeBean bean = methodInject();
-        logger.info("Bean PrototypeBean's HashCode : {}",bean.hashCode());
+        logger.info("Bean PrototypeBean's HashCode : {}", bean.hashCode());
         bean.say();
     }
 //    <public|protected> [abstract] <return-type> theMethodName(no-arguments);

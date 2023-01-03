@@ -15,7 +15,7 @@ public class MyPrototypeBean {
     private String dateTimeString = LocalDateTime.now().toString();
 
     public String getDateTime() {
-        logger.info("myPrototypeBean2 hashcode:{}",this.hashCode());
+        logger.info("myPrototypeBean2 hashcode:{}", this.hashCode());
         return dateTimeString;
     }
 }

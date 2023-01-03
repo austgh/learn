@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class PrototypeBean {
-    private static final Logger logger= LoggerFactory.getLogger(PrototypeBean.class);
+    private static final Logger logger = LoggerFactory.getLogger(PrototypeBean.class);
 
     public void say() {
         logger.info("say something...");

@@ -11,22 +11,21 @@ import org.springframework.context.annotation.*;
 @Configuration
 public class AppConfig {
     /**
-     *
      * proxyMode = ScopedProxyMode.TARGET_CLASS
      */
     @Bean
     @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE,
             proxyMode = ScopedProxyMode.TARGET_CLASS)
-    public MyPrototypeBean myPrototypeBean () {
+    public MyPrototypeBean myPrototypeBean() {
         return new MyPrototypeBean();
     }
 
     @Bean
-    public MySingletonBean mySingletonBean () {
+    public MySingletonBean mySingletonBean() {
         return new MySingletonBean();
     }
 
-    public static void main (String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
         MySingletonBean bean = context.getBean(MySingletonBean.class);
